@@ -1,0 +1,20 @@
+{% extends 'base.html' %}
+{% block title_block %} Delete Blog {% endblock %}
+{%block body_block %}
+			<form method="POST">
+                {% csrf_token %}
+				<div class="modal-header">						
+					<h4 class="modal-title">Delete {{delete_blog.author}} ?</h4>
+					
+				</div>
+				<div class="modal-body">					
+					<p>Are you sure you want to delete {{delete_blog.author}} ?</p>
+					<p class="text-warning"><small>This action cannot be undone.</small></p>
+				</div>
+				<div class="modal-footer">
+					<a href="{% url 'App_Blog:my_blogs' %}" class="btn btn-default" data-dismiss="modal" value="Cancel">Cancle </a>  
+					<input type="submit" class="btn btn-danger" value="Delete">
+				</div>
+			</form>
+
+{% endblock %}

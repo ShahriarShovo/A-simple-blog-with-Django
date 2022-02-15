@@ -1,0 +1,32 @@
+
+{% extends 'base.html' %}
+{% load custom_filters %}
+
+{% block title_block %} My Blogs {% endblock %}
+
+{% block body_block %}
+
+
+<div class="main-wrapper">
+    {% for blog in user.post_author.all %} 
+     <section class="blog-list px-3 py-5 p-md-5">
+         <div class="container">
+             <div class="item mb-5">
+                 <div class="media">
+                     <img class="mr-3 img-fluid post-thumb d-none d-md-flex" src="/media/{{blog.blog_image}}" alt="image" width="250px" height="100px">
+                     <div class="media-body">
+                         <h3 class="title mb-1">{{blog.blog_title}}</h3>
+                         <div class="meta mb-1"><span class="date">{{blog.blog_publish_date}}</span><span ></span><span class="comment">{{blog.blog_comment.count}}</span></div>
+                         <div class="intro">{{blog.blog_content | range_filter}}</div>
+                         <a class="more-link" href="{% url 'App_Blog:details' blog.slug %}">Read more &rarr;</a>
+                         <a class="more-link" href="{% url 'App_Blog:update_blog' pk=blog.pk %}">Edit &rarr;</a>
+                         <a class="more-link" href="{% url 'App_Blog:delete_blog' pk=blog.pk %}">Delete &rarr;</a>
+                     </div><!--//media-body-->
+                 </div><!--//media-->
+             </div><!--//item--> 
+         </div>
+     </section>
+     {% endfor %}
+ </div><!--//main-wrapper-->
+
+ {% endblock %}

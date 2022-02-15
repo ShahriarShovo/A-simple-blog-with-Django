@@ -1,0 +1,61 @@
+{% extends 'base.html' %}
+{% load custom_filters %}
+
+{% block title_block %} {{user.first_name}} {{user.last_name}} {% endblock %}
+
+{% block body_block %}
+
+
+{% if user.user_profile %}
+
+<header class="header text-center">	    
+   
+    <nav class="navbar navbar-expand-lg navbar-dark" >
+        <div id="navigation" class="collapse navbar-collapse flex-column" >
+            <div class="profile-section pt-3 pt-lg-0">
+                <img class="profile-image mb-3 rounded" src="/media/{{  user.user_profile.profile_pic }}" alt="image" width="250px" height="200px" >			
+            </div><!--//profile-section-->
+            <ul class="navbar-nav flex-column text-left">
+                <h1 class="blog-name pt-lg-4 mb-0"><a href="index.html">{{user.first_name}} {{user.last_name}}</a></h1>
+                <li >
+                    <h4 class="blog-name pt-lg-4 mb-0">{{user.username}}</h4>
+                    <h4 class="blog-name pt-lg-4 mb-0">{{user.email}}</h4>
+                </li>  
+            </ul>
+            <div class="my-2 my-md-3">
+                <a class="btn btn-primary" href="{% url 'App_login:update_profile_pic' %}" target="_blank">Change Picture</a>
+                <a  class="btn btn-warning" href="{% url 'App_login:update' %}" target="_blank">Change Your Informations</a>
+            </div>
+        </div>
+    </nav>
+</header>
+
+{% else %}
+
+<header class="header text-center">	    
+    
+    <nav class="navbar navbar-expand-lg navbar-dark" >
+        <div id="navigation" class="collapse navbar-collapse flex-column" >
+            <div class="profile-section pt-3 pt-lg-0">
+                <img class="profile-image mb-3 rounded " src="/media/profile_pics/avater.jpg" alt="image" width="250px" height="200px" >			
+            </div><!--//profile-section-->
+            <ul class="navbar-nav flex-column text-left">
+                <h1 class="blog-name pt-lg-4 mb-0"><a href="index.html">{{user.first_name}} {{user.last_name}}</a></h1>
+                <li >
+                    <h4 class="blog-name pt-lg-4 mb-0">{{user.username}}</h4>
+                    <h4 class="blog-name pt-lg-4 mb-0">{{user.email}}</h4>
+                </li>  
+            </ul>
+            <div class="my-2 my-md-3">
+                <a class="btn btn-primary" href="{% url 'App_login:change_picture' %}" target="_blank">Change Picture</a>
+                <a  class="btn btn-warning" href="{% url 'App_login:update' %}" target="_blank">Change Your Informations</a>
+            </div>
+        </div>
+    </nav>
+</header>
+
+{% endif %}
+
+
+
+{% endblock %}
